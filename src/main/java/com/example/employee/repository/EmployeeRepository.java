@@ -1,15 +1,15 @@
 package com.example.employee.repository;
 
+
 import com.example.employee.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> ,CrudRepository<Employee, Long> {
@@ -29,14 +29,14 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> ,CrudR
     //6.将*的名字改成*,输出这次修改影响的行数
 
     //7.删除姓名是*的employee
-    Employee findByName(String name);
+    Employee findFirstByName(String name);
     Employee findDistinctFirstByNameContains(String name);
     Employee findTop1BySalaryAndCompanyId(int salary,long companyId);
-   // List<Employee> findAll(Sort sort);
-
     Page<Employee> findAll(Pageable pageable);
-//    String findBySalaryAndId(int id,int salary);
-//
-//    String findByName(Employee employee);
+    Employee findByName(String name);
+
+//    long deleteByName(String name);
+
+
 
 }

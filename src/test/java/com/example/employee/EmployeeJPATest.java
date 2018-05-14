@@ -1,6 +1,7 @@
 package com.example.employee;
 
 import com.example.employee.entity.Employee;
+//import com.example.employee.repository.CombineRepository;
 import com.example.employee.repository.EmployeeRepository;
 import org.flywaydb.core.Flyway;
 import org.junit.Before;
@@ -44,7 +45,7 @@ public class EmployeeJPATest {
         Long temp = (long)1;
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000, temp);
   //      String actualName = null;
-        String actualName = employeeRepository.findByName(expectedEmployee.getName()).getName();
+        String actualName = employeeRepository.findFirstByName(expectedEmployee.getName()).getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
@@ -80,7 +81,9 @@ public class EmployeeJPATest {
     public void should_return_company_name_when_input_employee_name() throws Exception {
         //5.查找xiaohong的所在的公司的公司名称
         String expectedCompanyName = "alibaba";
-        String actualCompanyName = null;
+        Long temp = (long)1;
+        Employee expectedEmployee = new Employee("xiaohong",19,"female",7000, temp);
+        String actualCompanyName = employeeRepository.findByName(expectedEmployee.getName()).getCompany().getCompanyName();
         assertThat(actualCompanyName).isEqualTo(expectedCompanyName);
     }
 
@@ -88,6 +91,8 @@ public class EmployeeJPATest {
     public void should_return_influence_lines_when_update_employee_name() throws Exception {
         //6.将xiaohong的名字改成xiaobai,输出这次修改影响的行数
         Integer expectedLine = 1;
+        Long temp = (long)1;
+        Employee expectedEmployee = new Employee("xiaohong",19,"female",7000, temp);
         Integer actualLine = null;
         assertThat(actualLine).isEqualTo(expectedLine);
     }
