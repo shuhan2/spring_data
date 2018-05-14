@@ -51,7 +51,7 @@ public class EmployeeJPATest {
         //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
         Long temp = (long)1;
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,temp);
-        String actualName = null;
+        String actualName = employeeRepository.findDistinctFirstByNameContains(expectedEmployee.getName()).getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 

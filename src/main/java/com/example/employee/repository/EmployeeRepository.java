@@ -10,7 +10,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
     //1.查询名字是*的第一个employee
 
-    //2.找出Employee表中第一个姓名包含`*`字符并且薪资大于*的雇员个人信息
+    //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
 
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
 
@@ -22,7 +22,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 
     //7.删除姓名是*的employee
     Employee findByName(String name);
-//    Employee findBySalaryAndName(String name,int salary);
+    Employee findDistinctFirstByNameContains(String name);
 //    String findBySalaryAndId(int id,int salary);
 //
 //    String findByName(Employee employee);
