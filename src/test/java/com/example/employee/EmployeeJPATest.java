@@ -17,6 +17,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Id;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
@@ -68,8 +70,10 @@ public class EmployeeJPATest {
     public void should_return_employee_list_when_input_page_request() throws Exception {
         //4.实现对Employee的分页查询，每页两条数据，一共三页数。
         //注意：PageRequest的构造方法已经弃用了代替的是PageRequest.of,并且最后一个参数代表按照table中的哪一个字段排序
-        Page<Employee> EmployeePage = null;
+        Page<Employee> EmployeePage = employeeRepository.findAll(PageRequest.of(1,2));
         assertThat(EmployeePage.getTotalPages()).isEqualTo(3);
+//        assertThat(EmployeePage.getSize()).isEqualTo(2);
+//        assertThat(EmployeePage.getPageable()).isEqualTo(PageRequest.of(1,2));
     }
 
     @Test
