@@ -2,6 +2,7 @@ package com.example.employee.repository;
 
 import com.example.employee.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,6 +24,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long>{
     //7.删除姓名是*的employee
     Employee findByName(String name);
     Employee findDistinctFirstByNameContains(String name);
+
+
+       Employee findTop1BySalaryAndCompanyId(int salary,long companyId);
 //    String findBySalaryAndId(int id,int salary);
 //
 //    String findByName(Employee employee);
