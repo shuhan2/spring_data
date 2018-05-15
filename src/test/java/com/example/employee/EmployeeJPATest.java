@@ -83,7 +83,7 @@ public class EmployeeJPATest {
         String expectedCompanyName = "alibaba";
         Long temp = (long)1;
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000, temp);
-        String actualCompanyName = employeeRepository.findByName(expectedEmployee.getName()).getCompany().getCompanyName();
+        String actualCompanyName = employeeRepository.findById(expectedEmployee.getId()).getCompany().getCompanyName();
         assertThat(actualCompanyName).isEqualTo(expectedCompanyName);
     }
 
@@ -93,7 +93,7 @@ public class EmployeeJPATest {
         Integer expectedLine = 1;
         Long temp = (long)1;
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000, temp);
-        Integer actualLine = null;
+        Integer actualLine = employeeRepository.findByName("xiaohai","xiaohong");
         assertThat(actualLine).isEqualTo(expectedLine);
     }
 

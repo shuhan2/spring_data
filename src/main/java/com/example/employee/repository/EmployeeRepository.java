@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -33,8 +35,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> ,CrudR
     Employee findDistinctFirstByNameContains(String name);
     Employee findTop1BySalaryAndCompanyId(int salary,long companyId);
     Page<Employee> findAll(Pageable pageable);
-    Employee findByName(String name);
-
+    Employee findById(long id);
+    @Modifying
+    @Query("update Employee employee set employee.name =?1  where employee.name =?2 ")
+    int findByName(String outputName,String inputName);
 //    long deleteByName(String name);
 
 
